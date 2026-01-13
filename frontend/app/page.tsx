@@ -15,8 +15,13 @@ export default function Page() {
   const [summary, setSummary] = useState<string | null>(null);
   const [wordCount, setWordCount] = useState<number | null>(null);
 
-  const isSubmitDisabled =
-    loading || (!file && text.trim().length === 0);
+  const MAX_CHARS = 12000;
+  const charCount = text.length;
+  const isOverLimit = charCount > MAX_CHARS;
+
+
+  const isSubmitDisabled = loading || (!file && text.trim().length === 0) || isOverLimit;
+
 
   async function handleSubmit() {
     setLoading(true);
@@ -70,13 +75,25 @@ export default function Page() {
 
         {/* Text Input */}
         <textarea
-          className="w-full border rounded-lg p-3 mb-3 disabled:bg-gray-100"
+          className="w-full border rounded-lg p-3 mb-1 disabled:bg-gray-100"
           rows={6}
           placeholder="Paste document text here…"
           value={text}
           disabled={!!file}
           onChange={(e) => setText(e.target.value)}
         />
+
+        <div className="flex justify-between text-sm text-gray-500 mb-3">
+          <span>
+            {charCount} / {MAX_CHARS} characters
+          </span>
+
+          {isOverLimit && (
+            <span className="text-red-600">
+              Reduce text to enable summarization
+            </span>
+          )}
+        </div>
 
         {/* File Upload */}
         <input

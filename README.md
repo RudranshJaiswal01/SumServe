@@ -7,6 +7,16 @@ The project focuses on **clean architecture, correctness, and clarity**, rather 
 
 ---
 
+## Live Demo
+
+The application is publicly deployed and accessible here:
+
+🔗 **Live URL:** https://sumserve.onrender.com
+
+> Note: The deployed version runs as a single FastAPI server that serves both the API and the prebuilt frontend.
+
+---
+
 ## Assignment Requirements Coverage
 
 This project satisfies the assignment requirements as follows:
@@ -200,6 +210,8 @@ pytest
 ## Limitations:
 
 - No authentication or user management
+
+- Input text is limited to 12,000 characters to ensure predictable performance (no chunking implemented)
 
 - No streaming summaries
 
